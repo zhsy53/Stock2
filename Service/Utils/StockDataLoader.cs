@@ -1,15 +1,21 @@
-﻿using Service.Module;
+﻿using System.Diagnostics;
+using NLog;
+using Service.Module;
 
 namespace Service.Utils;
 
 public static class StockDataLoader
 {
-    public static IEnumerable<StockData> Load()
+    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
+    public static IEnumerable<StockData> Load(string path)
     {
-        var history = StockHistoryDataLoader.Load();
-        Console.WriteLine($"统计历史数据的股票数: {history.Count}");
-        var metadata = StockMetadataLoader.Load().ToDictionary(o => o.Code, o => o.Name);
-        Console.WriteLine($"元数据包含的股票数: {metadata.Count}");
+        var history = StockHistoryDataLoader.Load(path);
+        Log.Info("历史数据: {}", history.Count);
+
+        var stockMetadataLoader = new StockMetadataCSVLoader();
+        var metadata = stockMetadataLoader.Load().ToDictionary(o => o.Code, o => o.Name);
+        Log.Info("元数据: {}", metadata.Count);
 
         foreach (var kv in history.Where(kv => metadata.ContainsKey(kv.Key)))
         {

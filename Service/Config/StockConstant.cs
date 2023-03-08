@@ -7,10 +7,10 @@ public static class StockConstant
     public const string ShangHaiPrefix = "sh";
     public const string ShenZhenPrefix = "sz";
 
-    public const string ShangHaiMetadataFilename = @"sh.xls";
-    public const string ShenZhenMetadataFilename = @"sz.xlsx";
+    // public const string ShangHaiMetadataFilename = @"sh.xls";
+    // public const string ShenZhenMetadataFilename = @"sz.xlsx";
 
-    public readonly static string[] AllowCodePrefix =
+    public static readonly string[] AllowCodePrefix =
     {
         // 沪A
         "sh600", "sh601", "sh603", "sh605",
@@ -22,7 +22,10 @@ public static class StockConstant
         "sz300"
     };
 
-    public readonly static string MetadataExcelPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\metadata\";
+    private static readonly string HOME = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+    private static readonly char SEP = Path.DirectorySeparatorChar;
 
-    public readonly static string HistoryPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\history\";
+    // public static readonly string MetadataExcelPath = HOME + $"{SEP}Downloads{SEP}metadata{SEP}";
+
+    public static readonly string HistoryPath = HOME + $"{SEP}Downloads{SEP}history{SEP}";
 }

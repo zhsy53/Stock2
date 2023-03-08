@@ -1,4 +1,5 @@
-﻿using Service.Config;
+﻿using System.IO.MemoryMappedFiles;
+using Service.Config;
 using Service.Module;
 using Service.Parser;
 
@@ -9,12 +10,12 @@ public static class StockHistoryDataLoader
     /**
      * 读取目录下所有*.day文件(deep不限)
      */
-    public static Dictionary<string, StockHistoryData> Load()
+    public static Dictionary<string, StockHistoryData> Load(string path)
     {
-        return Directory.GetFiles(StockConstant.HistoryPath, "*" + StockConstant.FileSuffix, SearchOption.AllDirectories)
+        return Directory.GetFiles(path, "*" + StockConstant.FileSuffix, SearchOption.AllDirectories)
             .Where(o => StockConstant.AllowCodePrefix.Contains(o[^12..^7]))
             .AsParallel()
-            // .WithDegreeOfParallelism(64)
+            .WithDegreeOfParallelism(64)
             .ToDictionary(ExtractStockCodeFromFilename, ParserFromFile);
     }
 
