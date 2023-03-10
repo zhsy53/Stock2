@@ -22,10 +22,10 @@ public static class StockConstant
         "sz300"
     };
 
-    private static readonly string HOME = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-    private static readonly char SEP = Path.DirectorySeparatorChar;
+    private static readonly string Home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+    private static readonly char Sep = Path.DirectorySeparatorChar;
 
     // public static readonly string MetadataExcelPath = HOME + $"{SEP}Downloads{SEP}metadata{SEP}";
 
-    public static readonly string HistoryPath = HOME + $"{SEP}Downloads{SEP}history{SEP}";
+    public static readonly string HistoryPath = Home + $"{Sep}Downloads{Sep}history{Sep}";
 }

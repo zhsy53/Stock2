@@ -21,7 +21,7 @@
         </Content>
         <!-- <PackageReference Include="NPOI" Version="2.6.0" /> -->
         <!-- <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.2" />-->
-        <PackageReference Include="CsvHelper" Version="30.0.1"/>
-        <PackageReference Include="NLog" Version="5.1.2"/>
+        <PackageReference Include="CsvHelper" Version="30.0.1" />
+        <PackageReference Include="NLog" Version="5.1.2" />
     </ItemGroup>
 </Project>

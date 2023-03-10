@@ -36,7 +36,6 @@ public static class HttpServer
             Log.Info("parameters: {0}", parameters);
 
             var result = callback(parameters);
-            Log.Info("执行完毕,共有结果: [{}]条", result.Count);
 
             resp.ContentType = "application/text";
             resp.ContentEncoding = Encoding.UTF8;

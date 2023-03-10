@@ -6,15 +6,16 @@
         <Nullable>enable</Nullable>
 
         <PublishAot>true</PublishAot>
-        <!--<PublishSingleFile>true</PublishSingleFile>-->
         <PublishRelease>true</PublishRelease>
-        <SelfContained>true</SelfContained>
-        <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
-        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <PublishTrimmed>true</PublishTrimmed>
-        <PublishReadyToRun>true</PublishReadyToRun>
 
         <StripSymbols>true</StripSymbols>
+
+        <!--<PublishSingleFile>true</PublishSingleFile>-->
+        <!-- <SelfContained>true</SelfContained> -->
+        <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+        <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier> -->
+        <!-- <PublishReadyToRun>true</PublishReadyToRun> -->
     </PropertyGroup>
 
     <ItemGroup>
