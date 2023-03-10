@@ -19,6 +19,8 @@ dotnet run -- arg1 arg2 ...
 <https://github.com/dotnet/runtime/blob/main/src/coreclr/nativeaot/docs/compiling.md>
 
 ```shell
+apt-get install clang zlib1g-dev
+
 dotnet publish --help
 
 dotnet publish -c Release -o ./target

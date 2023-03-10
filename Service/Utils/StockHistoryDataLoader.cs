@@ -1,5 +1,4 @@
-﻿using System.IO.MemoryMappedFiles;
-using Service.Config;
+﻿using Service.Config;
 using Service.Module;
 using Service.Parser;
 

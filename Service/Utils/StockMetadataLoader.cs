@@ -2,7 +2,7 @@ using Service.Module;
 
 namespace Service.Utils;
 
-public interface StockMetadataLoader
+public interface IStockMetadataLoader
 {
     IEnumerable<StockMetadata> Load();
 }

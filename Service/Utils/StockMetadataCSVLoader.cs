@@ -1,16 +1,13 @@
 ﻿using System.Globalization;
 using System.Text;
 using CsvHelper;
-using NLog;
 using Service.Module;
 using CFG = Service.Config.StockConstant;
 
 namespace Service.Utils;
 
-public class StockMetadataCSVLoader : StockMetadataLoader
+public class StockMetadataCsvLoader : IStockMetadataLoader
 {
-    private static readonly Logger log = LogManager.GetCurrentClassLogger();
-
     public IEnumerable<StockMetadata> Load()
     {
         return LoadShangHai().Concat(LoadShenZhen());
@@ -18,7 +15,7 @@ public class StockMetadataCSVLoader : StockMetadataLoader
 
     private static IEnumerable<StockMetadata> LoadShangHai()
     {
-        var path = Path.Combine(System.AppContext.BaseDirectory, $"Resources{Path.DirectorySeparatorChar}sh.csv");
+        var path = Path.Combine(AppContext.BaseDirectory, $"Resources{Path.DirectorySeparatorChar}sh.csv");
         return LoadFromCsvFile(path, 0, 2, CFG.ShangHaiPrefix);
     }
 
@@ -28,15 +25,11 @@ public class StockMetadataCSVLoader : StockMetadataLoader
         return LoadFromCsvFile(path, 4, 5, CFG.ShenZhenPrefix);
     }
 
-    //TODO
     private static IEnumerable<StockMetadata> LoadFromCsvFile(string path, int codeIndex, int nameIndex, string prefix)
     {
         using var reader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
         csv.Read();
-        while (csv.Read())
-        {
-            yield return new StockMetadata(prefix + csv.GetField<string>(codeIndex), csv.GetField<string>(nameIndex));
-        }
+        while (csv.Read()) yield return new StockMetadata(prefix + csv.GetField<string>(codeIndex), csv.GetField<string>(nameIndex)!);
     }
 }

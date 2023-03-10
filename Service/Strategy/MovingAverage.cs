@@ -17,7 +17,7 @@ public readonly record struct MovingAverage(double Avg, List<int> Curve)
 
         foreach (var i in list.Skip(1).Select(o => o > avg).Select(ToInt).ToList())
         {
-            if (i == pre) r[^1] = r[^1] + i;
+            if (i == pre) r[^1] += i;
             else r.Add(i);
 
             pre = i;
