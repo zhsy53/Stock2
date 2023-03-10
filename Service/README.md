@@ -28,7 +28,10 @@ dotnet publish -c Release -o ./target
 # 查看
 dpkg --print-architecture
 # https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
-dotnet publish -r linux-x64 -c Release -o ./target
-# 通过.csproj配置?
-dotnet publish -c Release -p:PublishAot=true -p:PublishTrimmed=true --sc -r win-x64 -o ./target
+
+dotnet restore && dotnet clean
+
+dotnet publish -o=./target --sc -r=linux-x64 -c=Release 
+# # 通过.csproj配置?
+dotnet publish -o=./target --sc -r=linux-x64 -c=Release -p:PublishAot=true -p:PublishTrimmed=true --disable-build-servers
 ```

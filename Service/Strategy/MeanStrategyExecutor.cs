@@ -48,7 +48,7 @@ public static class MeanStrategyExecutor
 
         watch.Stop();
 
-        Log.Info("分析完毕,耗时: [{}] 秒,共有待选结果: [{}]", watch.Elapsed.Seconds, result.Count);
+        Log.Info("分析完毕,耗时: [{}] 秒,共有待选结果: [{}] 条", watch.Elapsed.Seconds, result.Count);
 
         return result;
     }

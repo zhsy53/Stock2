@@ -22,7 +22,7 @@ public static class HttpServer
             var req = ctx.Request;
             var resp = ctx.Response;
 
-            Log.Info("url: {}, method: {}, hostname: {}, agent: {}", req.Url, req.HttpMethod, req.UserHostName, req.UserAgent);
+            Log.Debug("当前请求: {0}", req.Url);
 
             if (req.Url?.AbsolutePath == "/shutdown")
             {
@@ -32,10 +32,7 @@ public static class HttpServer
 
             if (!run) return;
 
-            var parameters = ParseParameters(req.QueryString);
-            Log.Info("parameters: {0}", parameters);
-
-            var result = callback(parameters);
+            var result = callback(ParseParameters(req.QueryString));
 
             resp.ContentType = "application/text";
             resp.ContentEncoding = Encoding.UTF8;

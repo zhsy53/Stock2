@@ -10,11 +10,11 @@ public static class StockDataLoader
     public static IEnumerable<StockData> Load(string path)
     {
         var history = StockHistoryDataLoader.Load(path);
-        Log.Info("历史数据: {}", history.Count);
+        Log.Info("历史数据: [{}] 条", history.Count);
 
         var stockMetadataLoader = new StockMetadataCsvLoader();
         var metadata = stockMetadataLoader.Load().ToDictionary(o => o.Code, o => o.Name);
-        Log.Info("元数据: {}", metadata.Count);
+        Log.Info("元数据: [{}] 条", metadata.Count);
 
         foreach (var kv in history.Where(kv => metadata.ContainsKey(kv.Key))) yield return new StockData(new StockMetadata(kv.Key, metadata[kv.Key]), kv.Value.List);
     }
