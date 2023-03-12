@@ -8,29 +8,37 @@ var log = LogManager.GetCurrentClassLogger();
 
 static string IntToDecimal(int price)
 {
-    return Math.Round(Convert.ToDecimal(price / 100.0), 2).ToString(CultureInfo.CurrentCulture).PadRight(10)[..10];
+    return Math.Round(Convert.ToDecimal(price / 100.0), 2)
+        .ToString(CultureInfo.CurrentCulture)
+        .PadRight(10)[..10];
 }
 
 //解析参数
 var parameters = new MeanStrategyParameters();
 
 log.Info("请将所有历史数据存放在指定目录,默认目录为: {0}", StockConstant.HistoryPath);
-if (args.Length >= 1) parameters.Path = args[0];
 
-if (args.Length >= 2) parameters.Count = int.Parse(args[1]);
+var path = StockConstant.HistoryPath;
+if (args.Length >= 1)
+    path = args[0];
+if (args.Length >= 2)
+    parameters.Count = int.Parse(args[1]);
 
-if (args.Length >= 3) parameters.Min = int.Parse(args[2]);
+if (args.Length >= 3)
+    parameters.Min = int.Parse(args[2]);
 
-if (args.Length >= 4) parameters.Max = int.Parse(args[3]);
+if (args.Length >= 4)
+    parameters.Max = int.Parse(args[3]);
 
-if (args.Length >= 5) parameters.Percentage = int.Parse(args[4]);
+if (args.Length >= 5)
+    parameters.Percentage = int.Parse(args[4]);
 
-log.Info("当前指定的数据目录为: {0}", parameters.Path);
+log.Info("当前指定的数据目录为: {0}", path);
 log.Info("当前统计的交易日为: [{}]天", parameters.Count);
 log.Info("当前过滤的价格区间(最近收盘价)为: [{},{}]", parameters.Min, parameters.Max);
 log.Info("过滤当前价格不超出最低价的: [{}%]", parameters.Percentage);
 
-var list = MeanStrategyExecutor.Execute(parameters);
+var list = MeanStrategyExecutor.Execute(path, false, parameters);
 
 log.Info(new string('=', 100));
 log.Info(new string('=', 100));

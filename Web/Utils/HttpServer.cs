@@ -30,14 +30,17 @@ public static class HttpServer
                 run = false;
             }
 
-            if (!run) return;
+            if (!run)
+                return;
 
             var result = callback(ParseParameters(req.QueryString));
 
             resp.ContentType = "application/text";
             resp.ContentEncoding = Encoding.UTF8;
 
-            await resp.OutputStream.WriteAsync(Encoding.UTF8.GetBytes(SerializeStockDataList(result)));
+            await resp.OutputStream.WriteAsync(
+                Encoding.UTF8.GetBytes(SerializeStockDataList(result))
+            );
             resp.Close();
         }
     }
@@ -51,13 +54,11 @@ public static class HttpServer
             // var pi = o.GetType().GetProperty(key, BindingFlags.Public | BindingFlags.Instance);
             // if (pi != null) pi.SetValue(o, collection[key], null);
             var values = collection.GetValues(key);
-            if (values == null || values.Length == 0) continue;
+            if (values == null || values.Length == 0)
+                continue;
 
             switch (key.ToLower())
             {
-                case "path":
-                    o.Path = values[0];
-                    break;
                 case "count":
                     o.Count = int.Parse(values[0]);
                     break;
@@ -78,21 +79,23 @@ public static class HttpServer
 
     private static string SerializeStockData(StockData o)
     {
-        return $"{o.Metadata.Code.PadRight(8)[..8]}\t" +
-               $"{o.Metadata.Name.PadRight(10)[..10]}\t" +
-               $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Min())}\t" +
-               $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Max())}\t" +
-               $"{IntToDecimal(o.HistoryData[^1].ClosingPrice)}";
+        return $"{o.Metadata.Code.PadRight(8)[..8]}\t"
+            + $"{o.Metadata.Name.PadRight(10)[..10]}\t"
+            + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Min())}\t"
+            + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Max())}\t"
+            + $"{IntToDecimal(o.HistoryData[^1].ClosingPrice)}";
     }
 
     private static string SerializeStockDataList(IEnumerable<StockData> list)
     {
-        return string.Join("\n", list.Select(SerializeStockData).ToList());
+        return string.Join("\n", list.Select(SerializeStockData).ToList()) + "\n";
     }
 
     private static string IntToDecimal(int price)
     {
-        return Math.Round(Convert.ToDecimal(price / 100.0), 2).ToString(CultureInfo.CurrentCulture).PadRight(10)[..10];
+        return Math.Round(Convert.ToDecimal(price / 100.0), 2)
+            .ToString(CultureInfo.CurrentCulture)
+            .PadRight(10)[..10];
     }
 }
 

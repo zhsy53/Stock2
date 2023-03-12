@@ -11,10 +11,11 @@ public static class StockHistoryDataLoader
      */
     public static Dictionary<string, StockHistoryData> Load(string path)
     {
-        return Directory.GetFiles(path, "*" + StockConstant.FileSuffix, SearchOption.AllDirectories)
+        return Directory
+            .GetFiles(path, "*" + StockConstant.FileSuffix, SearchOption.AllDirectories)
             .Where(o => StockConstant.AllowCodePrefix.Contains(o[^12..^7]))
             .AsParallel()
-            .WithDegreeOfParallelism(64)
+            // .WithDegreeOfParallelism(64)
             .ToDictionary(ExtractStockCodeFromFilename, ParserFromFile);
     }
 
