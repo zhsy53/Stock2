@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Globalization;
 using System.Net;
+using System.Net.Mime;
 using System.Text;
 using NLog;
 using Service.Module;
@@ -35,7 +36,7 @@ public static class HttpServer
 
             var result = callback(ParseParameters(req.QueryString));
 
-            resp.ContentType = "application/text";
+            resp.ContentType = MediaTypeNames.Text.Plain;
             resp.ContentEncoding = Encoding.UTF8;
 
             await resp.OutputStream.WriteAsync(
