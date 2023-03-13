@@ -7,12 +7,8 @@ using Web.Utils;
 var log = LogManager.GetCurrentClassLogger();
 
 //历史数据目录
-var path = StockConstant.HistoryPath;
-bool cache = false;
-if (args.Length >= 1)
-    path = args[0];
-if (args.Length >= 2)
-    cache = bool.Parse(args[1]);
+var path = args.Length >= 1 ? args[0] : StockConstant.HistoryPath;
+var cache = args.Length >= 2 && bool.Parse(args[1]);
 
 log.Debug("历史数据读取目录: {0}, 是否使用缓存: {1}", path, cache);
 
@@ -24,10 +20,7 @@ listener.Start();
 
 log.Info("服务已启动!");
 
-var task = HttpServer.Run(
-    listener,
-    parameters => MeanStrategyExecutor.Execute(path, cache, parameters)
-);
+var task = HttpServer.Run(listener, parameters => MeanStrategyExecutor.Execute(path, cache, parameters));
 task.GetAwaiter().GetResult();
 
 listener.Close();

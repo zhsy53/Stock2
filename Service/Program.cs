@@ -18,20 +18,15 @@ var parameters = new MeanStrategyParameters();
 
 log.Info("请将所有历史数据存放在指定目录,默认目录为: {0}", StockConstant.HistoryPath);
 
-var path = StockConstant.HistoryPath;
-if (args.Length >= 1)
-    path = args[0];
-if (args.Length >= 2)
-    parameters.Count = int.Parse(args[1]);
+var path = args.Length >= 1 ? args[0] : StockConstant.HistoryPath;
 
-if (args.Length >= 3)
-    parameters.Min = int.Parse(args[2]);
+if (args.Length >= 2) parameters.Count = int.Parse(args[1]);
 
-if (args.Length >= 4)
-    parameters.Max = int.Parse(args[3]);
+if (args.Length >= 3) parameters.Min = int.Parse(args[2]);
 
-if (args.Length >= 5)
-    parameters.Percentage = int.Parse(args[4]);
+if (args.Length >= 4) parameters.Max = int.Parse(args[3]);
+
+if (args.Length >= 5) parameters.Percentage = int.Parse(args[4]);
 
 log.Info("当前指定的数据目录为: {0}", path);
 log.Info("当前统计的交易日为: [{}]天", parameters.Count);

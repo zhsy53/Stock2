@@ -22,7 +22,7 @@
         <Content Include="NLog.config">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <PackageReference Include="NLog" Version="5.1.2" />
-        <ProjectReference Include="..\Service\Service.csproj" />
+        <PackageReference Include="NLog" Version="5.1.2"/>
+        <ProjectReference Include="..\Service\Service.csproj"/>
     </ItemGroup>
 </Project>

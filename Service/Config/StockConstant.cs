@@ -7,9 +7,6 @@ public static class StockConstant
     public const string ShangHaiPrefix = "sh";
     public const string ShenZhenPrefix = "sz";
 
-    // public const string ShangHaiMetadataFilename = @"sh.xls";
-    // public const string ShenZhenMetadataFilename = @"sz.xlsx";
-
     public static readonly string[] AllowCodePrefix =
     {
         // 沪A
@@ -22,10 +19,7 @@ public static class StockConstant
         "sz300"
     };
 
-    private static readonly string Home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
     private static readonly char Sep = Path.DirectorySeparatorChar;
 
-    // public static readonly string MetadataExcelPath = HOME + $"{SEP}Downloads{SEP}metadata{SEP}";
-
-    public static readonly string HistoryPath = Home + $"{Sep}Downloads{Sep}history{Sep}";
+    public static readonly string HistoryPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + $"{Sep}Downloads{Sep}history{Sep}";
 }

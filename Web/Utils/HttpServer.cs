@@ -81,10 +81,10 @@ public static class HttpServer
     private static string SerializeStockData(StockData o)
     {
         return $"{o.Metadata.Code.PadRight(8)[..8]}\t"
-            + $"{o.Metadata.Name.PadRight(10)[..10]}\t"
-            + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Min())}\t"
-            + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Max())}\t"
-            + $"{IntToDecimal(o.HistoryData[^1].ClosingPrice)}";
+               + $"{o.Metadata.Name.PadRight(10)[..10]}\t"
+               + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Min())}\t"
+               + $"{IntToDecimal(o.HistoryData.Select(e => e.ClosingPrice).Max())}\t"
+               + $"{IntToDecimal(o.HistoryData[^1].ClosingPrice)}";
     }
 
     private static string SerializeStockDataList(IEnumerable<StockData> list)
